@@ -1,0 +1,28 @@
+{
+  "name": "yozh/yii2-settings",
+  "description": "Description",
+  "type": "yii2-extension",
+  "keywords": ["yii2","extension","settings"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ivan Kryazhev",
+      "email": "t9221823420@gmail.com",
+      "homepage": "https://github.com/t9221823420"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "yozh/yii2-base": "@dev",
+    "kartik-v/yii2-helpers": "dev-master",
+    "powerkernel/yii2-tinymce": "*"
+  },
+  "extra": {
+    "_bootstrap": "yozh\\settings\\Bootstrap"
+  },
+  "autoload": {
+    "psr-4": {
+      "yozh\\settings\\": "src"
+    }
+  }
+}
