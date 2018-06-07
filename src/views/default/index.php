@@ -4,8 +4,8 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
-use yozh\modal\ModalWidget as Modal;
-use yozh\widget\ActiveButtonWidget as ActiveButton;
+use yozh\widget\widgets\Modal;
+use yozh\widget\widgets\ActiveButton;
 
 include '_header.php';
 

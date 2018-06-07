@@ -10,7 +10,7 @@ namespace yozh\settings\models;
 
 use yozh\crud\models\BaseModel as ActiveRecord;
 use yozh\form\ActiveField;
-use yozh\widget\BaseWidget as Widget;
+use yozh\widget\widgets\BaseWidget as Widget;
 
 class Settings extends ActiveRecord
 {
