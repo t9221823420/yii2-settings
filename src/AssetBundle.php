@@ -17,7 +17,7 @@ class AssetBundle extends \yozh\base\AssetBundle
     ];
 	
     public $depends = [
-        //'yii\bootstrap\BootstrapAsset',
+        //\yozh\base\AssetBundle::class,
     ];
 
 	public $publishOptions = [

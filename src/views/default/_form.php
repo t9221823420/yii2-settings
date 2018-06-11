@@ -21,8 +21,6 @@ if( $model->type ) {
 
 $fields = function( $form ) use ( $model, $inputs, $widgets ) {
 	
-    $foo = $form->field( $model, 'name' );
-    
 	/**
 	 * @var ActiveForm $form
 	 */
@@ -51,7 +49,7 @@ $fields = function( $form ) use ( $model, $inputs, $widgets ) {
 
 ?>
 
-<div class="">
+<div class="form">
 	
 	<?php $form = ActiveForm::begin(); ?>
 	
