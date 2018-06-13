@@ -7,7 +7,7 @@ use yii\helpers\Url;
 use yozh\widget\widgets\Modal;
 use yozh\widget\widgets\ActiveButton;
 
-include '_header.php';
+include __DIR__ . '/_header.php';
 
 /**
  * @var \yozh\crud\models\BaseModel $model

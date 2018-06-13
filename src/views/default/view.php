@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-include '_header.php';
+include __DIR__ . '/_header.php';
 
 /* @var $this yii\web\View */
 
