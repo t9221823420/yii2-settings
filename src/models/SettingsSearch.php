@@ -12,7 +12,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
-use yozh\crud\interfaces\ActiveRecordSearchInterface;
+use yozh\base\interfaces\models\ActiveRecordSearchInterface;
 
 class SettingsSearch extends Settings implements ActiveRecordSearchInterface
 {

@@ -10,9 +10,9 @@ use yozh\widget\widgets\ActiveButton;
 include __DIR__ . '/_header.php';
 
 /**
- * @var \yozh\crud\models\BaseModel $model
+ * @var \yozh\crud\models\BaseModel $Model
  */
-$columns = $model->attributeIndexList();
+$columns = $Model->attributesIndexList();
 
 array_push( $columns, [
 		'class'          => 'yii\grid\ActionColumn',
@@ -21,7 +21,7 @@ array_push( $columns, [
 		'template'       => '{update}{delete}',
 		'buttons'        => [
 			
-			'update' => function( $url, $model ) {
+			'update' => function( $url, $Model ) {
 				
 				return ActiveButton::widget( [
 					'label'       => '<span class="glyphicon glyphicon-pencil"></span>',
@@ -32,7 +32,7 @@ array_push( $columns, [
 						//'class' => 'btn btn-success',
 					],
 					
-					'model'      => $model,
+					'model'      => $Model,
 					'attributes' => [ 'id', ],
 				
 				] );
@@ -43,7 +43,7 @@ array_push( $columns, [
 			},
 			
 			/*
-			'delete' => function( $url, $model ) {
+			'delete' => function( $url, $Model ) {
 				return Html::a( '<span class="glyphicon glyphicon-trash"></span>', $url, [
 					'title'       => Yii::t( 'app', 'Delete' ),
 					'data-method' => 'post',
@@ -54,11 +54,11 @@ array_push( $columns, [
 		],
 		
 		/*
-		'urlCreator' => function( $action, $model, $key, $index ) {
+		'urlCreator' => function( $action, $Model, $key, $index ) {
 			
-			$classname = strtolower( ( new\ReflectionObject( $model ) )->getShortName() );
+			$classname = strtolower( ( new\ReflectionObject( $Model ) )->getShortName() );
 			
-			return Url::to( "/$classname/{$model->id}/$action" );
+			return Url::to( "/$classname/{$Model->id}/$action" );
 		}
 		*/
 	]
@@ -89,7 +89,7 @@ array_push( $columns, [
 	
 	<?php Pjax::begin( [ 'id' => 'pjax-container' ] ); ?>
 	
-	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+	<?php // echo $this->render('_search', ['Model' => $searchModel]); ?>
 	
 	<?= GridView::widget( [
 		'dataProvider' => $dataProvider,

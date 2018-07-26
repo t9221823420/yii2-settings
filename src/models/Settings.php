@@ -47,7 +47,7 @@ class Settings extends ActiveRecord
 		];
 	}
 	
-	public function attributeIndexList()
+	public function attributesIndexList( ?array $only = null, ?array $except = null, ?bool $schemaOnly = false )
 	{
 		$attributes = [ 'name', 'data' ];
 		

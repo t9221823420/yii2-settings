@@ -14,14 +14,6 @@ class DefaultController extends Controller
 		return Settings::class;
 	}
 	
-	public function actionTest()
-	{
-		$foo = Yii::$app->settings->get( 'foo', 'sdfgsdfg' );
-		
-		Yii::$app->settings->set( 'foo', 'chk' );
-		
-	}
-	
 	public function actionGetWidgetsList( $value )
 	{
 		$items = [];
@@ -30,7 +22,7 @@ class DefaultController extends Controller
 			$items[ $name ] = $item['label'];
 		}
 		
-		return $this->_renderSelectItems( $items );
+		return static::renderSelectItems( $items );
 		
 	}
 }
