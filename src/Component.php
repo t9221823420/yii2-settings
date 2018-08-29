@@ -17,6 +17,9 @@ class Component  extends \yii\base\Component
 		if ( $Settings = Model::findOne( ['name' => $name]) ){
 			return $Settings->data;
 		}
+		elseif( defined($name) ){
+			return constant( $name );
+		}
 		elseif( !is_null($default) ){
 			return $default;
 		}
