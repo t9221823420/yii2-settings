@@ -7,8 +7,6 @@ use yozh\form\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $form yii\widgets\ActiveForm */
 
-//$searchModel = $searchModel ?? new \backend\modules\prosell\models\prosell\OrderSearch();
-
 ?>
 
     <style>
