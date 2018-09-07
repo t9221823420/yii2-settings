@@ -42,25 +42,8 @@ array_push( $columns, [
 				] );
 			},
 			
-			/*
-			'delete' => function( $url, $Model ) {
-				return Html::a( '<span class="glyphicon glyphicon-trash"></span>', $url, [
-					'title'       => Yii::t( 'app', 'Delete' ),
-					'data-method' => 'post',
-				] );
-			},
-		
-				*/
 		],
 		
-		/*
-		'urlCreator' => function( $action, $Model, $key, $index ) {
-			
-			$classname = strtolower( ( new\ReflectionObject( $Model ) )->getShortName() );
-			
-			return Url::to( "/$classname/{$Model->id}/$action" );
-		}
-		*/
 	]
 
 );
@@ -95,7 +78,7 @@ array_push( $columns, [
 		'dataProvider' => $dataProvider,
 		//'filterModel' => $searchModel,
 		'layout'       => "{items}\n{pager}",
-		'showHeader'   => false,
+		//'showHeader'   => false,
 		'tableOptions' => [
 			'class' => 'table table-striped table-hover',
 		],

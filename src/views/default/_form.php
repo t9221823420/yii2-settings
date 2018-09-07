@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yozh\form\ActiveForm;
 use yozh\form\ActiveField;
+use yozh\base\components\helpers\Inflector;
+use yozh\settings\models\Settings;
 
 $inputs = [];
 
@@ -13,36 +15,48 @@ foreach( ActiveField::getInputs() as $name => $item ) {
 
 $widgets = [];
 
-if( $Model->type ) {
-	foreach( ActiveField::getWidgets( $Model->type ) as $name => $item ) {
-		$widgets[ $name ] = $item['label'];
-	}
+foreach( ActiveField::getWidgets( $Model->input_type ) as $name => $item ) {
+	$widgets[ $name ] = $item['label'];
 }
 
 $fields = function( $form ) use ( $Model, $inputs, $widgets ) {
+	
+	$typeList = array_combine( Settings::getConstants( 'TYPE_' ), Settings::getConstants( 'TYPE_' ) );
 	
 	/**
 	 * @var ActiveForm $form
 	 */
 	return [
 		
-		'name' => $form->field( $Model, 'name' ),
+		'name' => $Model->isNewRecord || !in_array( $Model->type, [
+			Settings::TYPE_SYSTEM,
+		] )
+			? $form->field( $Model, 'name' )
+			: $form->field( $Model, 'name' )->static()
+		,
 		
-		'type' => $form->field( $Model, 'type' )->dropDownList( $inputs, [
+		'type' => $Model->isNewRecord || !in_array( $Model->type, [
+			Settings::TYPE_SYSTEM,
+		] )
+			? $form->field( $Model, 'type' )->dropDownList( $typeList )
+			: $form->field( $Model, 'type' )->static()
+		,
+		
+		'input_type' => $form->field( $Model, 'input_type' )->dropDownList( $inputs, [
 			'class'           => 'form-control yozh-widget yozh-widget-nested-select',
 			'url'             => Url::to( [ 'get-widgets-list' ] ),
-			'nested-selector' => '#' . Html::getInputId( $Model, 'widget' ),
+			'nested-selector' => '#' . Html::getInputId( $Model, 'input_widget' ),
 			'prompt'          => Yii::t( 'app', 'Select' ),
 		] ),
 		
-		'widget' => $form->field( $Model, 'widget' )->dropDownList( $widgets, [
+		'input_widget' => $form->field( $Model, 'input_widget' )->dropDownList( $widgets, [
 			'class'  => 'form-control',
 			'prompt' => Yii::t( 'app', 'Select' ),
 		] ),
 		
 		'config' => $form->field( $Model, 'config' )->baseWidget( ActiveField::WIDGET_TYPE_TEXTAREA ),
 		
-		'data' => $form->field( $Model, 'data' )->baseWidget( $Model->widget ),
+		'data' => $form->field( $Model, 'data' )->baseWidget( $Model->input_widget ),
 	
 	];
 };
