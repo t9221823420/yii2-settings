@@ -34,7 +34,7 @@ class Settings extends ActiveRecord
 	}
 	*/
 	
-	public static function addSystemParam( $name, $data, $config = null, $input_type = null, $input_widget = null )
+	public static function addSystemParam( $name, $data, $config = null, $input_type = null, $input_widget = null, $override = false )
 	{
 		$attributes = [
 			'type'         => static::TYPE_SYSTEM,
@@ -46,18 +46,20 @@ class Settings extends ActiveRecord
 		
 		if( $Settings = static::findOne( [ 'name' => $name ] ) ) {
 			
-			if( $Settings->type != static::TYPE_SYSTEM )
-			{
+			if( $Settings->type != static::TYPE_SYSTEM ) {
 				throw new \yii\base\InvalidParamException( "Settings '{$Settings->name}' is not system type." );
 			}
 			
-			$Settings->setAttributes( $attributes )->save();
+			if ( $override ){
+				$Settings->setAttributes( $attributes )->save();
+			}
+			
 		}
-		else{
+		else {
 			
 			$attributes['name'] = $name;
 			
-			(new Settings($attributes))->save();
+			( new Settings( $attributes ) )->save();
 		}
 		
 	}
