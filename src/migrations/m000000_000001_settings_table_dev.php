@@ -25,7 +25,7 @@ class m000000_000001_settings_table_dev extends Migration
 	public function safeUp( $params = [] )
 	{
 		parent::safeUp( [
-			'mode' => 1 ? self::ALTER_MODE_UPDATE : self::ALTER_MODE_IGNORE,
+			'mode' => 1 ? static::ALTER_MODE_UPDATE : static::ALTER_MODE_IGNORE,
 		] );
 		
 	}
