@@ -9,28 +9,6 @@ use yozh\form\ActiveForm;
 
 ?>
 
-    <style>
-        
-        .panel.search .panel-heading .form-item,
-        .panel.search .panel-heading .form-control,
-        .common-search > * {
-            display: inline-block;
-        }
-
-        .panel.search .panel-heading .form-control.btn,
-        .common-search .form-control.btn {
-            margin-left: 10px;
-            width: auto;
-        }
-
-        .common-search,
-        .advanced-search,
-        .advanced-search > .panel-group {
-            position: relative;
-            width: 100%;
-        }
-
-    </style>
 
 <?php $form = ActiveForm::begin( [
 	//'id'     => 'search-form',

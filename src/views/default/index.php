@@ -10,7 +10,7 @@ use yozh\widget\widgets\ActiveButton;
 include __DIR__ . '/_header.php';
 
 /**
- * @var \yozh\crud\models\BaseModel $Model
+ * @var \yozh\crud\models\BaseActiveRecord $Model
  */
 $columns = $Model->attributesIndexList();
 

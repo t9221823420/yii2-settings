@@ -9,7 +9,7 @@
 namespace yozh\settings\models;
 
 use yozh\base\components\validators\ReadOnlyValidator;
-use yozh\crud\models\BaseModel as ActiveRecord;
+use yozh\crud\models\BaseActiveRecord as ActiveRecord;
 use yozh\form\ActiveField;
 use yozh\widget\widgets\BaseWidget as Widget;
 

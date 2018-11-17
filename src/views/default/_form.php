@@ -19,9 +19,9 @@ foreach( ActiveField::getWidgets( $Model->input_type ) as $name => $item ) {
 	$widgets[ $name ] = $item['label'];
 }
 
-$fields = function( $form ) use ( $Model, $inputs, $widgets ) {
+$fields = function( ActiveForm $form ) use ( $Model, $inputs, $widgets ) {
 	
-	$typeList = array_combine( Settings::getConstants( 'TYPE_' ), Settings::getConstants( 'TYPE_' ) );
+	$typeList = Settings::getConstants( 'TYPE', true );
 	
 	/**
 	 * @var ActiveForm $form
