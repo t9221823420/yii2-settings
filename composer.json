@@ -14,7 +14,7 @@
   "minimum-stability": "stable",
   "require": {
     "yozh/yii2-crud-v1": "@dev",
-    "kartik-v/yii2-helpers": "dev-master",
+    "kartik-v/yii2-helpers": "~1.0",
     "powerkernel/yii2-tinymce": "*"
   },
   "extra": {
