@@ -44,8 +44,8 @@ $fields = function( ActiveForm $form ) use ( $Model, $inputs, $widgets ) {
 		
 		'input_type' => $form->field( $Model, 'input_type' )->dropDownList( $inputs, [
 			'class'           => 'form-control yozh-widget yozh-widget-nested-select',
-			'url'             => Url::to( [ 'get-widgets-list' ] ),
-			'nested-selector' => '#' . Html::getInputId( $Model, 'input_widget' ),
+			'data-url'             => Url::to( [ 'get-widgets-list' ] ),
+			'data-selector' => '#' . Html::getInputId( $Model, 'input_widget' ),
 			'prompt'          => Yii::t( 'app', 'Select' ),
 		] ),
 		
