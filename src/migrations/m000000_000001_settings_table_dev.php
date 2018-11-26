@@ -12,7 +12,8 @@ class m000000_000001_settings_table_dev extends Migration
 {
 	//protected static $_table = 'settings';
 	
-	public function __construct( array $config = [] ) {
+	public function __construct( array $config = [] )
+	{
 		
 		static::$_table = Settings::getRawTableName();
 		
@@ -35,15 +36,15 @@ class m000000_000001_settings_table_dev extends Migration
 		
 		return parent::getColumns( [
 			
-			'name'   => $this->string(),
-			'type'   => $this->enum( Settings::getConstants( 'TYPE_' ) )
-			                 ->notNull()->defaultValue( Settings::DEFAULT_TYPE ),
+			'name'         => $this->string(),
+			'type'         => $this->enum( Settings::getConstants( 'TYPE_' ) )
+			                       ->notNull()->defaultValue( Settings::DEFAULT_TYPE ),
 			'input_type'   => $this->enum( ActiveField::getConstants( 'INPUT_TYPE_' ) )
 			                       ->notNull()->defaultValue( ActiveField::DEFAULT_INPUT_TYPE ),
 			'input_widget' => $this->enum( ActiveField::getConstants( 'WIDGET_TYPE_' ) )
 			                       ->notNull()->defaultValue( ActiveField::DEFAULT_WIDGET_TYPE ),
-			'config' => $this->json(),
-			'data'   => $this->json(),
+			'config'       => $this->json(),
+			'data'         => $this->json(),
 		
 		] );
 	}
