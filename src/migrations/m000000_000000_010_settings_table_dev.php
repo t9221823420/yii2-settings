@@ -8,16 +8,16 @@ use yozh\settings\models\Settings;
 /**
  * Class m180305_040759_tablename_table_dev
  */
-class m000000_000001_settings_table_dev extends Migration
+class m000000_000000_010_settings_table_dev extends Migration
 {
 	//protected static $_table = 'settings';
 	
-	public function __construct( array $config = [] )
-	{
+	public function __construct( array $config = [] ) {
 		
 		static::$_table = Settings::getRawTableName();
 		
 		parent::__construct( $config );
+		
 	}
 	
 	/**
