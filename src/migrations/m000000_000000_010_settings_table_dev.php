@@ -10,11 +10,11 @@ use yozh\settings\models\Settings;
  */
 class m000000_000000_010_settings_table_dev extends Migration
 {
-	//protected static $_table = 'settings';
+	protected static $_table;
 	
 	public function __construct( array $config = [] ) {
 		
-		static::$_table = Settings::getRawTableName();
+		static::$_table = static::$_table ?? Settings::getRawTableName();
 		
 		parent::__construct( $config );
 		
