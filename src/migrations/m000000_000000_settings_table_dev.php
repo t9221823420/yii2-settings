@@ -8,7 +8,7 @@ use yozh\settings\models\Settings;
 /**
  * Class m180305_040759_tablename_table_dev
  */
-class m000000_000000_010_settings_table_dev extends Migration
+class m000000_000000_settings_table_dev extends Migration
 {
 	protected static $_table;
 	
@@ -25,9 +25,7 @@ class m000000_000000_010_settings_table_dev extends Migration
 	 */
 	public function safeUp( $params = [] )
 	{
-		parent::safeUp( [
-			'mode' => 1 ? static::ALTER_MODE_UPDATE : static::ALTER_MODE_IGNORE,
-		] );
+		parent::safeUp( $params );
 		
 	}
 	
