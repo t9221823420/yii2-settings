@@ -25,7 +25,7 @@ class m000000_000000_settings_table_dev extends Migration
 	 */
 	public function safeUp( $params = [] )
 	{
-		parent::safeUp( $params );
+		return parent::safeUp( $params );
 		
 	}
 	
