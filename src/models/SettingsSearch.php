@@ -16,13 +16,24 @@ use yozh\base\interfaces\models\ActiveRecordSearchInterface;
 
 class SettingsSearch extends Settings implements ActiveRecordSearchInterface
 {
-    public $filter_search;
+	public $filter_search;
 	
-	public function rules()
+	public function rules( $rules = [], $update = false )
 	{
-		return [
-		    [ [ 'filter_search', ], 'filter', 'filter' => '\yii\helpers\HtmlPurifier::process' ],
-		];
+		static $_rules;
+		
+		if( !$_rules || $update ) {
+			
+			$_rules = parent::rules( \yozh\base\components\validators\Validator::merge( [
+				
+				[ [ 'filter_search', ], 'filter', 'filter' => '\yii\helpers\HtmlPurifier::process' ],
+			
+			], $rules ) );
+			
+		}
+		
+		return $_rules;
+		
 	}
 	
 	public function scenarios()
@@ -47,7 +58,7 @@ class SettingsSearch extends Settings implements ActiveRecordSearchInterface
 		
 		$dataProvider = new ActiveDataProvider( [
 			'query' => $query,
-			'sort' => [ 'defaultOrder' => [ 'id' => SORT_DESC ] ],
+			'sort'  => [ 'defaultOrder' => [ 'id' => SORT_DESC ] ],
 		] );
 		
 		/*
@@ -56,7 +67,7 @@ class SettingsSearch extends Settings implements ActiveRecordSearchInterface
 		];
 		*/
 		
-		if( !( $this->load($params) && $this->validate() ) ) {
+		if( !( $this->load( $params ) && $this->validate() ) ) {
 			return $dataProvider;
 		}
 		

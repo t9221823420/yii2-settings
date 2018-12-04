@@ -50,7 +50,7 @@ class Settings extends ActiveRecord
 				throw new \yii\base\InvalidParamException( "Settings '{$Settings->name}' is not system type." );
 			}
 			
-			if ( $override ){
+			if( $override ) {
 				$Settings->setAttributes( $attributes )->save();
 			}
 			
@@ -64,42 +64,51 @@ class Settings extends ActiveRecord
 		
 	}
 	
-	public function rules()
+	public function rules( $rules = [], $update = false )
 	{
+		static $_rules;
 		
-		return [
-			[ [ 'name', 'type', 'data', ], 'required', 'except' => static::SCENARIO_FILTER ],
+		if( !$_rules || $update ) {
 			
-			[ [ 'name', 'type', ], ReadOnlyValidator::class, 'when' => function( $Model ) {
-				return in_array( $Model->getOldAttribute( 'type' ), [
-					static::TYPE_SYSTEM,
-				] );
-			} ],
-			
-			[ [ 'name', ], 'string', 'max' => 255 ],
-			[ [ 'name', ], 'filter', 'filter' => 'trim' ],
-			[ [ 'name', ], 'filter', 'filter' => '\yii\helpers\HtmlPurifier::process' ],
-			[ [ 'name', ], 'unique', 'targetClass' => static::class ],
-			
-			[ [ 'type', ], 'default', 'value' => Settings::DEFAULT_TYPE ],
-			[ [ 'type', ], 'in', 'range' => Settings::getConstants( 'TYPE_' ) ],
-			
-			[ 'input_type', 'default', 'value' => ActiveField::DEFAULT_INPUT_TYPE ],
-			[ 'input_widget', 'default', 'value' => ActiveField::DEFAULT_WIDGET_TYPE ],
-			
-			[ [ 'input_type' ], 'in', 'range' => ActiveField::getConstants( 'INPUT_TYPE_' ) ],
-			[ [ 'input_widget' ], 'in', 'range' => ActiveField::getConstants( 'WIDGET_TYPE_' ) ],
-			
-			[ [ 'config', 'data', ], function( $attribute ) {
+			$_rules = parent::rules( \yozh\base\components\validators\Validator::merge( [
 				
-				$result = json_decode( \yii\helpers\Json::encode( $this->$attribute ), true );
+				[ [ 'name', 'type', 'data', ], 'required', 'except' => static::SCENARIO_FILTER ],
 				
-				if( json_last_error() ) {
-					$this->addError( 'chain', \Yii::t( 'app', "Invalid or malformed data for JSON" ) );
-				}
-			} ],
+				[ [ 'name', 'type', ], ReadOnlyValidator::class, 'when' => function( $Model ) {
+					return in_array( $Model->getOldAttribute( 'type' ), [
+						static::TYPE_SYSTEM,
+					] );
+				} ],
+				
+				[ [ 'name', ], 'string', 'max' => 255 ],
+				[ [ 'name', ], 'filter', 'filter' => 'trim' ],
+				[ [ 'name', ], 'filter', 'filter' => '\yii\helpers\HtmlPurifier::process' ],
+				[ [ 'name', ], 'unique', 'targetClass' => static::class ],
+				
+				[ [ 'type', ], 'default', 'value' => Settings::DEFAULT_TYPE ],
+				[ [ 'type', ], 'in', 'range' => Settings::getConstants( 'TYPE_' ) ],
+				
+				[ 'input_type', 'default', 'value' => ActiveField::DEFAULT_INPUT_TYPE ],
+				[ 'input_widget', 'default', 'value' => ActiveField::DEFAULT_WIDGET_TYPE ],
+				
+				[ [ 'input_type' ], 'in', 'range' => ActiveField::getConstants( 'INPUT_TYPE_' ) ],
+				[ [ 'input_widget' ], 'in', 'range' => ActiveField::getConstants( 'WIDGET_TYPE_' ) ],
+				
+				[ [ 'config', 'data', ], function( $attribute ) {
+					
+					$result = json_decode( \yii\helpers\Json::encode( $this->$attribute ), true );
+					
+					if( json_last_error() ) {
+						$this->addError( 'chain', \Yii::t( 'app', "Invalid or malformed data for JSON" ) );
+					}
+				} ],
+			
+			], $rules ) );
+			
+		}
 		
-		];
+		return $_rules;
+		
 	}
 	
 	public function attributesIndexList( ?array $only = null, ?array $except = null, ?bool $schemaOnly = false )
