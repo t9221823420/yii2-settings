@@ -10,7 +10,7 @@ namespace yozh\settings;
 
 use yozh\settings\models\Settings as Model;
 
-class Component  extends \yii\base\Component
+class Component  extends \yozh\base\components\Component
 {
 	public function get( $name, $default = null )
 	{
