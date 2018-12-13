@@ -20,7 +20,7 @@ use yozh\form\ActiveForm;
     <div class="w-100 valign-bottom-container inline-block-container form-group">
 
         <div class="common-search">
-			<?= $form->field( $searchModel, 'filter_search', [
+			<?= $form->field( $ModelSearch, 'filter_search', [
                         'options' => [
                             'class'  => 'w-50 form-item',
                             'prompt' => Yii::t( 'app', 'Name' ),

@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 use yii\helpers\Inflector;
 
-if( !isset( $Model ) && isset( $searchModel ) ) {
-	$Model = $searchModel;
+if( !isset( $Model ) && isset( $ModelSearch ) ) {
+	$Model = $ModelSearch;
 }
 
 $_params_['actionId']    = $actionId = $this->context->action->id;
@@ -18,7 +18,7 @@ $modelTitle = trim( preg_replace( '/(Search|)/', '', $modelTitle ) );
 
 $_params_['modelTitle'] = $modelTitle;
 
-if( isset($searchModel) && Yii::$app->request->get( $searchModel->formName() ) ){
+if( isset($ModelSearch) && Yii::$app->request->get( $ModelSearch->formName() ) ){
 	$this->title = Yii::t( 'app', 'Search result') . ": $modelTitle";
 }
 else{
