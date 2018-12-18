@@ -34,7 +34,13 @@ class Settings extends ActiveRecord
 	}
 	*/
 	
-	public static function addSystemParam( $name, $data, $config = null, $input_type = null, $input_widget = null, $override = false )
+	public static function addSystemParam(
+		$name,
+		$data,
+		$config = null,
+		$input_type = null,
+		$input_widget = null,
+		$override = false )
 	{
 		$attributes = [
 			'type'         => static::TYPE_SYSTEM,
@@ -46,9 +52,18 @@ class Settings extends ActiveRecord
 		
 		if( $Settings = static::findOne( [ 'name' => $name ] ) ) {
 			
+			/*
+			 * trap for errors when name of Settings used as const at code
+			 * and it can not be changed, but it not set as system
+			 * type 'system' blocks changing name of Setting. @TODO it's need to block etherything of such Settings
+			 * yozh\userworkactivity\models\LogUserWorkActivity::GAP_TIME
+			 *
+			 */
+			/*
 			if( $Settings->type != static::TYPE_SYSTEM ) {
 				throw new \yii\base\InvalidParamException( "Settings '{$Settings->name}' is not system type." );
 			}
+			*/
 			
 			if( $override ) {
 				$Settings->setAttributes( $attributes )->save();
@@ -113,13 +128,28 @@ class Settings extends ActiveRecord
 	
 	public function attributesIndexList( ?array $only = null, ?array $except = null, ?bool $schemaOnly = false )
 	{
-		$attributes = [
-			'name',
-			'data',
-			'type',
-		];
+		return parent::attributesIndexList( [
+				'name',
+				'data',
+				'type',
+			]
+			, $except
+			, $schemaOnly
+		);
 		
-		return array_combine( $attributes, $attributes );
+	}
+	
+	public function attributesEditList( ?array $only = null, ?array $except = null, ?bool $schemaOnly = false )
+	{
+		return parent::attributesEditList( [
+				'name',
+				'type',
+				'data',
+			]
+			, $except
+			, $schemaOnly
+		);
+		
 	}
 	
 }
